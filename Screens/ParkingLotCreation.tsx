@@ -7,10 +7,15 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useRecoilState} from 'recoil';
-import {NoOfSpace} from '../Atom/ParkingLotCreation';
+import {parkingSpace} from '../Atom/ParkingLotCreation';
 function ParkingLotCreation({navigation}: any) {
   // const [ParkingNumber, setParkingNumber] = useState('');
-  const [ParkingNumber, setParkingNumber] = useRecoilState<string>(NoOfSpace);
+
+  const [ParkingNumber, setParkingNumber] =
+    useRecoilState<string>(parkingSpace);
+
+  const regex = /^[1-9][0-9]*$/;
+
   const handleOnPress = () => {
     if (ParkingNumber == '0' || ParkingNumber.length === 0) {
       return;
@@ -25,7 +30,12 @@ function ParkingLotCreation({navigation}: any) {
         placeholderTextColor={'grey'}
         placeholder="Enter Parking Spaces you want"
         keyboardType="numeric"
-        onChangeText={setParkingNumber}
+        // onChangeText={setParkingNumber}
+        onChangeText={value => {
+          if (regex.test(value) || value == '') {
+            setParkingNumber(value);
+          }
+        }}
         // value="ParkingNumber"
       />
       <TouchableOpacity

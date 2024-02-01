@@ -17,7 +17,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ParkingLotDrawing">
+        <Stack.Navigator initialRouteName="ParkingLotCreation">
           <Stack.Screen
             name="ParkingLotCreation"
             component={ParkingLotCreation}
